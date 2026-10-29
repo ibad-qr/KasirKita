@@ -10,10 +10,10 @@ Sistem kasir digital (offline-first) dengan sinkronisasi **Google Sheets**, plus
 
 | File | Fungsi |
 |------|--------|
-| `kasirkita_pos_sheets.html` | Aplikasi kasir (POS) + sync Google Sheets |
-| `katalog_toko.html` | Katalog pelanggan (tanpa gambar, keranjang → WA) |
+| `kasirkita-pos.html` | Aplikasi kasir (POS) + sync Google Sheets |
+| `index.html` | Katalog pelanggan (tanpa gambar, keranjang → WA) |
 | `GoogleAppsScript_KasirKita.gs` | Backend API untuk Google Spreadsheet |
-| `kasirkita_pos_v3.html` | Versi POS lokal saja (tanpa Sheets) — arsip |
+| `kasirkita-local.html` | Versi POS lokal saja (tanpa Sheets) — arsip |
 
 ---
 
