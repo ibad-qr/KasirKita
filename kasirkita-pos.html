@@ -101,6 +101,46 @@
 </head>
 <body class="h-full bg-slate-100 text-slate-800 flex flex-col md:flex-row select-none">
 
+    <!-- PIN LOCK SCREEN -->
+    <div id="pin-lock-screen" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950">
+        <div class="absolute inset-0 opacity-40" style="background:radial-gradient(ellipse at 30% 20%,#1d4ed8 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,#0f172a 0%,transparent 50%)"></div>
+        <div class="relative w-full max-w-sm bg-white rounded-3xl shadow-2xl p-6 sm:p-8 space-y-5">
+            <div class="text-center space-y-2">
+                <div class="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-br from-brand-600 to-brand-900 text-white flex items-center justify-center shadow-lg shadow-brand-600/30">
+                    <i data-lucide="lock" class="w-6 h-6"></i>
+                </div>
+                <h2 class="text-lg font-extrabold text-slate-900" id="pin-title">Masukkan PIN</h2>
+                <p class="text-xs text-slate-500" id="pin-subtitle">Akses terbatas untuk kasir toko</p>
+            </div>
+            <div class="flex justify-center gap-2" id="pin-dots">
+                <span class="pin-dot w-3 h-3 rounded-full bg-slate-200"></span>
+                <span class="pin-dot w-3 h-3 rounded-full bg-slate-200"></span>
+                <span class="pin-dot w-3 h-3 rounded-full bg-slate-200"></span>
+                <span class="pin-dot w-3 h-3 rounded-full bg-slate-200"></span>
+                <span class="pin-dot w-3 h-3 rounded-full bg-slate-200"></span>
+                <span class="pin-dot w-3 h-3 rounded-full bg-slate-200"></span>
+            </div>
+            <p id="pin-error" class="text-center text-xs font-bold text-rose-600 hidden">PIN salah. Coba lagi.</p>
+            <div class="grid grid-cols-3 gap-2.5" id="pin-pad">
+                <button type="button" class="pin-key h-14 rounded-2xl bg-slate-50 hover:bg-slate-100 text-xl font-bold text-slate-800 active:scale-95 transition" data-key="1">1</button>
+                <button type="button" class="pin-key h-14 rounded-2xl bg-slate-50 hover:bg-slate-100 text-xl font-bold text-slate-800 active:scale-95 transition" data-key="2">2</button>
+                <button type="button" class="pin-key h-14 rounded-2xl bg-slate-50 hover:bg-slate-100 text-xl font-bold text-slate-800 active:scale-95 transition" data-key="3">3</button>
+                <button type="button" class="pin-key h-14 rounded-2xl bg-slate-50 hover:bg-slate-100 text-xl font-bold text-slate-800 active:scale-95 transition" data-key="4">4</button>
+                <button type="button" class="pin-key h-14 rounded-2xl bg-slate-50 hover:bg-slate-100 text-xl font-bold text-slate-800 active:scale-95 transition" data-key="5">5</button>
+                <button type="button" class="pin-key h-14 rounded-2xl bg-slate-50 hover:bg-slate-100 text-xl font-bold text-slate-800 active:scale-95 transition" data-key="6">6</button>
+                <button type="button" class="pin-key h-14 rounded-2xl bg-slate-50 hover:bg-slate-100 text-xl font-bold text-slate-800 active:scale-95 transition" data-key="7">7</button>
+                <button type="button" class="pin-key h-14 rounded-2xl bg-slate-50 hover:bg-slate-100 text-xl font-bold text-slate-800 active:scale-95 transition" data-key="8">8</button>
+                <button type="button" class="pin-key h-14 rounded-2xl bg-slate-50 hover:bg-slate-100 text-xl font-bold text-slate-800 active:scale-95 transition" data-key="9">9</button>
+                <button type="button" class="pin-key h-14 rounded-2xl bg-slate-50 hover:bg-slate-100 text-sm font-bold text-slate-500 active:scale-95 transition" data-key="clear">C</button>
+                <button type="button" class="pin-key h-14 rounded-2xl bg-slate-50 hover:bg-slate-100 text-xl font-bold text-slate-800 active:scale-95 transition" data-key="0">0</button>
+                <button type="button" class="pin-key h-14 rounded-2xl bg-slate-50 hover:bg-slate-100 text-slate-700 active:scale-95 transition flex items-center justify-center" data-key="back">
+                    <i data-lucide="delete" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <p class="text-[10px] text-center text-slate-400" id="pin-hint">PIN default: <span class="font-bold text-slate-500">123456</span> — ganti di Pengaturan</p>
+        </div>
+    </div>
+
     <!-- DESKTOP SIDEBAR -->
     <aside class="hidden md:flex flex-col w-56 lg:w-64 bg-slate-900 text-white shrink-0 shadow-xl z-20">
         <div class="p-4 lg:p-5 flex items-center gap-3 border-b border-slate-800">
@@ -334,6 +374,26 @@
                     </div>
                     <button type="submit" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl text-xs">Simpan Pengaturan</button>
                 </form>
+                <!-- PIN Access -->
+                <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h3 class="font-extrabold text-xs sm:text-sm text-slate-800 border-b pb-2">Keamanan Akses (PIN)</h3>
+                    <p class="text-[11px] text-slate-500">PIN melindungi aplikasi kasir. Hanya orang yang tahu PIN yang bisa masuk.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">PIN Baru (6 digit)</label>
+                            <input type="password" id="setting-pin-new" maxlength="6" inputmode="numeric" pattern="[0-9]*" placeholder="••••••" class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-xs font-medium focus:ring-2 focus:ring-brand-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Ulangi PIN Baru</label>
+                            <input type="password" id="setting-pin-confirm" maxlength="6" inputmode="numeric" pattern="[0-9]*" placeholder="••••••" class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-xs font-medium focus:ring-2 focus:ring-brand-500 outline-none">
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button type="button" onclick="changePin()" class="px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold">Ubah PIN</button>
+                        <button type="button" onclick="lockAppNow()" class="px-4 py-2.5 bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100 rounded-xl text-xs font-bold">Kunci Aplikasi Sekarang</button>
+                    </div>
+                </div>
+
                 <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 space-y-3">
                     <div class="flex items-center justify-between border-b pb-2 gap-2">
                         <h3 class="font-extrabold text-xs sm:text-sm text-slate-800">Database Google Sheets</h3>
@@ -547,8 +607,126 @@ const DB_KEYS = {
     PRODUCTS: 'kasir_v3_products',
     TRANSACTIONS: 'kasir_v3_transactions',
     SETTINGS: 'kasir_v3_settings',
-    API_URL: 'kasir_v3_sheets_api_url'
+    API_URL: 'kasir_v3_sheets_api_url',
+    PIN: 'kasir_v3_access_pin',
+    PIN_UNLOCKED: 'kasir_v3_pin_session'
 };
+
+const DEFAULT_PIN = '123456';
+let pinBuffer = '';
+let pinUnlocked = sessionStorage.getItem(DB_KEYS.PIN_UNLOCKED) === '1';
+
+function getStoredPin() {
+    return localStorage.getItem(DB_KEYS.PIN) || DEFAULT_PIN;
+}
+
+function updatePinDots() {
+    document.querySelectorAll('#pin-dots .pin-dot').forEach((dot, i) => {
+        if (i < pinBuffer.length) {
+            dot.classList.remove('bg-slate-200');
+            dot.classList.add('bg-brand-600');
+        } else {
+            dot.classList.add('bg-slate-200');
+            dot.classList.remove('bg-brand-600');
+        }
+    });
+}
+
+function showPinError(show) {
+    const el = document.getElementById('pin-error');
+    if (!el) return;
+    el.classList.toggle('hidden', !show);
+}
+
+function unlockApp() {
+    pinUnlocked = true;
+    sessionStorage.setItem(DB_KEYS.PIN_UNLOCKED, '1');
+    pinBuffer = '';
+    updatePinDots();
+    showPinError(false);
+    const screen = document.getElementById('pin-lock-screen');
+    if (screen) {
+        screen.classList.add('hidden');
+    }
+    // hide default pin hint after first successful unlock if custom pin set
+    const hint = document.getElementById('pin-hint');
+    if (hint && getStoredPin() !== DEFAULT_PIN) hint.classList.add('hidden');
+}
+
+function lockAppNow() {
+    pinUnlocked = false;
+    sessionStorage.removeItem(DB_KEYS.PIN_UNLOCKED);
+    pinBuffer = '';
+    updatePinDots();
+    showPinError(false);
+    const screen = document.getElementById('pin-lock-screen');
+    if (screen) screen.classList.remove('hidden');
+    lucide.createIcons();
+}
+
+function handlePinKey(key) {
+    if (!document.getElementById('pin-lock-screen') || document.getElementById('pin-lock-screen').classList.contains('hidden')) return;
+    showPinError(false);
+    if (key === 'clear') {
+        pinBuffer = '';
+        updatePinDots();
+        return;
+    }
+    if (key === 'back') {
+        pinBuffer = pinBuffer.slice(0, -1);
+        updatePinDots();
+        return;
+    }
+    if (!/^[0-9]$/.test(key)) return;
+    if (pinBuffer.length >= 6) return;
+    pinBuffer += key;
+    updatePinDots();
+    if (pinBuffer.length === 6) {
+        if (pinBuffer === getStoredPin()) {
+            unlockApp();
+        } else {
+            showPinError(true);
+            pinBuffer = '';
+            setTimeout(updatePinDots, 200);
+        }
+    }
+}
+
+function initPinPad() {
+    document.querySelectorAll('.pin-key').forEach(btn => {
+        btn.addEventListener('click', () => handlePinKey(btn.getAttribute('data-key')));
+    });
+    document.addEventListener('keydown', (e) => {
+        const screen = document.getElementById('pin-lock-screen');
+        if (!screen || screen.classList.contains('hidden')) return;
+        if (e.key >= '0' && e.key <= '9') handlePinKey(e.key);
+        else if (e.key === 'Backspace') handlePinKey('back');
+        else if (e.key === 'Escape') handlePinKey('clear');
+    });
+}
+
+function changePin() {
+    const a = (document.getElementById('setting-pin-new').value || '').trim();
+    const b = (document.getElementById('setting-pin-confirm').value || '').trim();
+    if (!/^[0-9]{6}$/.test(a)) {
+        return swalWarning('PIN tidak valid', 'PIN harus tepat 6 digit angka.');
+    }
+    if (a !== b) {
+        return swalWarning('Tidak cocok', 'Ulangi PIN baru dengan benar.');
+    }
+    localStorage.setItem(DB_KEYS.PIN, a);
+    // juga simpan di settings agar ikut backup/sheets opsional
+    settings.accessPin = a;
+    saveLocalCache();
+    if (SHEETS_API_URL && navigator.onLine) syncToCloud(true);
+    document.getElementById('setting-pin-new').value = '';
+    document.getElementById('setting-pin-confirm').value = '';
+    const hint = document.getElementById('pin-hint');
+    if (hint) hint.classList.add('hidden');
+    swalSuccess('PIN diubah', 'PIN akses berhasil diperbarui. Gunakan PIN baru saat masuk berikutnya.');
+}
+
+
 
 /** URL Web App Google Apps Script (isi di Pengaturan) */
 let SHEETS_API_URL = localStorage.getItem(DB_KEYS.API_URL) || '';
@@ -655,6 +833,9 @@ async function syncFromCloud(silent = false) {
         if (cloudTx && cloudTx.length > 0) transactions = cloudTx;
         if (cloudSettings && Object.keys(cloudSettings).length > 0) {
             settings = Object.assign({}, settings, cloudSettings);
+            if (settings.accessPin && /^[0-9]{6}$/.test(String(settings.accessPin))) {
+                localStorage.setItem(DB_KEYS.PIN, String(settings.accessPin));
+            }
         }
 
         saveLocalCache();
@@ -1453,6 +1634,23 @@ function resetDatabase() {
 }
 
 window.onload = async function() {
+    initPinPad();
+    lucide.createIcons();
+    // Restore PIN from settings if any
+    if (settings.accessPin && /^[0-9]{6}$/.test(String(settings.accessPin))) {
+        localStorage.setItem(DB_KEYS.PIN, String(settings.accessPin));
+    }
+    if (getStoredPin() !== DEFAULT_PIN) {
+        const hint = document.getElementById('pin-hint');
+        if (hint) hint.classList.add('hidden');
+    }
+    if (pinUnlocked) {
+        unlockApp();
+    } else {
+        const screen = document.getElementById('pin-lock-screen');
+        if (screen) screen.classList.remove('hidden');
+    }
+
     updateOnlineStatus();
     document.getElementById('desktop-store-name').innerText = settings.storeName || 'KasirKita POS';
     document.getElementById('mobile-store-name').innerText = settings.storeName || 'KasirKita POS';
