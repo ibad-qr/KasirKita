@@ -17,7 +17,7 @@ Sistem kasir digital (offline-first) dengan sinkronisasi **Google Sheets**, plus
 
 ---
 
-## Fitur kasir (`kasirkita_pos_sheets.html`)
+## Fitur kasir (`kasirkita-pos.html`)
 
 - Mesin kasir: cari produk, keranjang, checkout
 - Metode pembayaran: Tunai, Transfer, QRIS, Kartu, E-Wallet, Lainnya
@@ -31,7 +31,7 @@ Sistem kasir digital (offline-first) dengan sinkronisasi **Google Sheets**, plus
 
 ---
 
-## Fitur katalog (`katalog_toko.html`)
+## Fitur katalog (`index.html`)
 
 - Tampilan modern, responsif (HP & desktop)
 - Tanpa gambar produk & tanpa halaman detail (sengaja ringkas)
@@ -70,7 +70,7 @@ Setelah mengubah script, selalu:
 
 ### 3. Hubungkan aplikasi kasir
 
-1. Buka `kasirkita_pos_sheets.html` di browser (lebih baik lewat server/hosting, bukan `file://`).
+1. Buka `kasirkita-pos.html` di browser (lebih baik lewat server/hosting, bukan `file://`).
 2. Menu **Pengaturan → Database Google Sheets**.
 3. Tempel URL Web App → **Simpan URL**.
 4. **Uji koneksi API**.
@@ -80,7 +80,7 @@ Setelah itu, simpan produk / profil / transaksi akan ikut push ke spreadsheet (s
 
 ### 4. Hubungkan katalog
 
-1. Buka `katalog_toko.html` di editor.
+1. Buka `index.html` di editor.
 2. Cari baris:
 
 ```js
@@ -93,7 +93,7 @@ const SHEETS_API_URL = 'https://script.google.com/macros/s/GANTI_DENGAN_ID_WEB_A
 Pelanggan cukup membuka:
 
 ```text
-https://domain-anda.com/katalog_toko.html
+https://domain-anda.com/
 ```
 
 ---
